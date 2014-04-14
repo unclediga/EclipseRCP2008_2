@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Favorites Plug-in
-Bundle-SymbolicName: com.qualityeclipse.favorites;singleton:=true
+Bundle-SymbolicName: com.qualityeclipse.favorites.my;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.qualityeclipse.favorites.FavoritesActivator
 Bundle-Vendor: QualityEclipse
@@ -12,3 +12,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: com.qualityeclipse.favorites.handlers,
+ com.qualityeclipse.favorites.views
