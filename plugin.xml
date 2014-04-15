@@ -108,10 +108,23 @@
                icon="icons/b2cub.gif"
                id="com.qualityeclipse.favorites.addToFavoritesInMembersView"
                label="Add"
+               menubarPath="com.qualityeclipse.favorites.membersViewPulldownSubMenu/content"
                style="push"
                toolbarPath="additions"
                tooltip="Add the selected items in the Members view to the Favorites ">
          </action>
+         <menu
+               icon="icons/sample.gif"
+               id="com.qualityeclipse.favorites.membersViewPulldownSubMenu"
+               label="Favorites"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
       </viewContribution>
    </extension>
 
