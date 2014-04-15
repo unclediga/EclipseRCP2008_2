@@ -73,6 +73,30 @@
                tooltip="Add the selected resource(s) to the Favorites view">
          </action>
       </objectContribution>
+      <viewerContribution
+            id="com.qualityeclipse.favorites.membersViewPopup"
+            targetID="org.eclipse.jdt.ui.MembersView">
+         <menu
+               icon="icons/sample.gif"
+               id="com.qualityeclipse.favorites.membersViewPopupSubMenu"
+               label="Favorites"
+               path="additions">
+            <groupMarker
+                  name="contents">
+            </groupMarker>
+            <separator
+                  name="separator">
+            </separator>
+         </menu>
+         <action
+               class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
+               icon="icons/b2cub.gif"
+               id="com.qualityeclipse.favorites.addToFavoritesInMembersView"
+               label="Add"
+               menubarPath="com.qualityeclipse.favorites.membersViewPopupSubMenu/contents"
+               tooltip="Add selected member’s compilation unit to the Favorites view">
+         </action>
+      </viewerContribution>
    </extension>
 
 </plugin>
