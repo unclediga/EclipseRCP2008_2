@@ -87,6 +87,7 @@ public class FavoritesView extends ViewPart {
 		viewer.setContentProvider(new ViewContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setInput(getViewSite());
+		getViewSite().setSelectionProvider(viewer);
 	}
 
 	/**

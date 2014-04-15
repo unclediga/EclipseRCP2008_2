@@ -16,5 +16,34 @@
             id="com.qualityeclipse.favorites.views.FavoritesView">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="com.qualityeclipse.favorites.workbenchActionSet"
+            label="Favorites ActionSet"
+            visible="true">
+         <menu
+               id="com.qualityeclipse.favorites.workbenchMenu"
+               label="Fa&amp;vorites"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               class="com.qualityeclipse.favorites.actions.OpenFavoritesViewActionDelegate"
+               icon="icons/sample.gif"
+               id="com.qualityeclipse.favorites.openFavoritesView"
+               label="Open Favo&amp;rites View"
+               menubarPath="com.qualityeclipse.favorites.workbenchMenu/content"
+               style="push"
+               toolbarPath="Normal/additions"
+               tooltip="Open the favorites view in the current workbench page">
+         </action>
+      </actionSet>
+   </extension>
 
 </plugin>
