@@ -65,7 +65,7 @@
          </menu>
          <action
                class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
-               menubarPath="additions"
+               menubarPath="com.qualityeclipse.favorites.popupSubMenu/contents"
                enablesFor="+"
                icon="icons/b2cub.gif"
                id="com.qualityeclipse.favorites.addToFavorites"
