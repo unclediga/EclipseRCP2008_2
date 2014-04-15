@@ -98,5 +98,21 @@
          </action>
       </viewerContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="com.qualityeclipse.favorites.membersViewActions"
+            targetID="org.eclipse.jdt.ui.MembersView">
+         <action
+               class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
+               icon="icons/b2cub.gif"
+               id="com.qualityeclipse.favorites.addToFavoritesInMembersView"
+               label="Add"
+               style="push"
+               toolbarPath="additions"
+               tooltip="Add the selected items in the Members view to the Favorites ">
+         </action>
+      </viewContribution>
+   </extension>
 
 </plugin>
