@@ -45,5 +45,34 @@
          </action>
       </actionSet>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="com.qualityeclipse.favorites.popupMenu"
+            objectClass="org.eclipse.core.resources.IResource">
+         <menu
+               icon="icons/sample.gif"
+               id="com.qualityeclipse.favorites.popupSubMenu"
+               label="Favorites"
+               path="additions">
+            <groupMarker
+                  name="contents">
+            </groupMarker>
+            <separator
+                  name="seperator">
+            </separator>
+         </menu>
+         <action
+               class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
+               menubarPath="additions"
+               enablesFor="+"
+               icon="icons/b2cub.gif"
+               id="com.qualityeclipse.favorites.addToFavorites"
+               label="Add"
+               tooltip="Add the selected resource(s) to the Favorites view">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>
