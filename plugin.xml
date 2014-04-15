@@ -150,5 +150,33 @@
          </menu>
       </viewContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="com.qualityeclipse.favorites.compilationUnitEditorActions"
+            targetID="org.eclipse.jdt.ui.CompilationUnitEditor">
+         <menu
+               id="com.qualityeclipse.favorites.compilationUnitEditorPopupSubMenu"
+               label="Favorites"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
+               icon="icons/b2edit1.gif"
+               id="com.qualityeclipse.favorites.addToFavoritesInCompilationUnitEditor"
+               label="Add"
+               menubarPath="com.qualityeclipse.favorites.compilationUnitEditorPopupSubMenu/content"
+               style="push"
+               toolbarPath="Normal/additions"
+               tooltip="Add the editor selection to the Favorites view">
+         </action>
+      </editorContribution>
+   </extension>
 
 </plugin>
