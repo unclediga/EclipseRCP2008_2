@@ -97,6 +97,29 @@
                tooltip="Add selected member’s compilation unit to the Favorites view">
          </action>
       </viewerContribution>
+      <viewerContribution
+            id="com.qualityeclipse.favorites.compilationUnitEditorPopup"
+            targetID="#CompilationUnitEditorContext">
+         <menu
+               icon="icons/sample.gif"
+               id="com.qualityeclipse.favorites.compilationUnitEditorPopupSumMenu"
+               label="Favorites"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               class="com.qualityeclipse.favorites.actions.AddToFavoritesActionDelegate"
+               icon="icons/b2edit1.gif"
+               id="com.qualityeclipse.favorites.addToFavoritesInCompilationUnitEditor"
+               label="Add"
+               menubarPath="com.qualityeclipse.favorites.compilationUnitEditorPopupSumMenu/content">
+         </action>
+      </viewerContribution>
    </extension>
    <extension
          point="org.eclipse.ui.viewActions">
