@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
+<?eclipse version="3.2"?>
 <plugin>
 
    <extension
@@ -34,6 +34,30 @@
             description="Add selected items to the Favorites view"
             id="com.qualityeclipse.favorites.commands.add"
             name="Add">
+      </command>
+      <command
+            categoryId="com.qualityeclipse.favorites.commands.category"
+            description="Copy selected items in the Favorites view"
+            id="com.qualityeclipse.favorites.commands.copy"
+            name="Copy">
+      </command>
+      <command
+            categoryId="com.qualityeclipse.favorites.commands.category"
+            description="Cut selected items from the Favorites view"
+            id="com.qualityeclipse.favorites.commands.cut"
+            name="Cut">
+      </command>
+      <command
+            categoryId="com.qualityeclipse.favorites.commands.category"
+            description="Paste clipboard contents into the Favorites view"
+            id="com.qualityeclipse.favorites.commands.paste"
+            name="Paste">
+      </command>
+      <command
+            categoryId="com.qualityeclipse.favorites.commands.category"
+            description="Rename the selected entry in the Favorites view"
+            id="com.qualityeclipse.favorites.commands.rename"
+            name="Rename...">
       </command>
    </extension>
    <extension
@@ -165,6 +189,46 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            locationURI="popup:com.qualityeclipse.favorites.views.FavoritesView?before=edit">
+         <command
+               commandId="com.qualityeclipse.favorites.commands.cut"
+               icon="icons/cut_edit.gif"
+               tooltip="Cut the currently selected items from the Favorites view">
+         </command>
+         <command
+               commandId="com.qualityeclipse.favorites.commands.copy"
+               icon="icons/copy_edit.gif"
+               tooltip="Copy the currently selected items in the Favorites view">
+         </command>
+         <command
+               commandId="com.qualityeclipse.favorites.commands.paste"
+               icon="icons/paste_edit.gif"
+               tooltip="Paste clipboard contents into the Favorites view">
+         </command>
+         <command
+               commandId="com.qualityeclipse.favorites.commands.rename"
+               tooltip="Rename the currently selected Favorites item">
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:com.qualityeclipse.favorites.views.FavoritesView?before=edit">
+         <command
+               commandId="com.qualityeclipse.favorites.commands.cut"
+               icon="icons/cut_edit.gif"
+               tooltip="Cut the currently selected favorites items">
+         </command>
+         <command
+               commandId="com.qualityeclipse.favorites.commands.copy"
+               icon="icons/copy_edit.gif"
+               tooltip="Copy the currently selected favorite items">
+         </command>
+         <command
+               commandId="com.qualityeclipse.favorites.commands.paste"
+               helpContextId="Paste the contents of the clipboard into the Favorites view"
+               icon="icons/paste_edit.gif">
+         </command>
+      </menuContribution>
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler class="com.qualityeclipse.favorites.handlers.OpenFavoritesViewHandler"
@@ -173,6 +237,98 @@
       <handler
             class="com.qualityeclipse.favorites.handlers.AddToFavoritesHandler"
             commandId="com.qualityeclipse.favorites.commands.add">
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.CopyFavoritesHandler"
+            commandId="org.eclipse.ui.edit.copy">
+         <activeWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.qualityeclipse.favorites.views.FavoritesView">
+               </equals>
+            </with>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.CopyFavoritesHandler"
+            commandId="com.qualityeclipse.favorites.commands.copy">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.CutFavoritesHandler"
+            commandId="org.eclipse.ui.edit.cut">
+         <activeWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.qualityeclipse.favorites.views.FavoritesView">
+               </equals>
+            </with>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.CutFavoritesHandler"
+            commandId="com.qualityeclipse.favorites.commands.cut">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.PasteFavoritesHandler"
+            commandId="org.eclipse.ui.edit.paste">
+         <activeWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.qualityeclipse.favorites.views.FavoritesView">
+               </equals>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.PasteFavoritesHandler"
+            commandId="com.qualityeclipse.favorites.commands.paste">
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.RenameFavoritesHandler"
+            commandId="com.qualityeclipse.favorites.commands.rename">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
       </handler>
    </extension>
    <extension
@@ -203,4 +359,5 @@
       </key>
    </extension>
    
+
 </plugin>

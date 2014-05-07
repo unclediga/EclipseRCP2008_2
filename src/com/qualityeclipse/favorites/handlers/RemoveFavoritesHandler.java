@@ -10,16 +10,16 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import com.qualityeclipse.favorites.model.FavoritesManager;
 
 /**
- * Add each currently selected object to the Favorites collection if it has not
- * already been added.
+ * Remove each currently selected object from the Favorites collection if it has
+ * not already been removed.
  */
-public class AddToFavoritesHandler extends AbstractHandler
+public class RemoveFavoritesHandler extends AbstractHandler
 {
    public Object execute(ExecutionEvent event)
          throws ExecutionException {
       ISelection selection = HandlerUtil.getCurrentSelection(event);
       if (selection instanceof IStructuredSelection)
-         FavoritesManager.getManager().addFavorites(
+         FavoritesManager.getManager().removeFavorites(
                ((IStructuredSelection) selection).toArray());
       return null;
    }
