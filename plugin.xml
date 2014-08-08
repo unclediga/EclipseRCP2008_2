@@ -59,6 +59,12 @@
             id="com.qualityeclipse.favorites.commands.rename"
             name="Rename...">
       </command>
+      <command
+            defaultHandler="com.qualityeclipse.favorites.handlers.OpenFavoritesViewHandler"
+            description="My Open the Favorites view"
+            id="com.qualityeclipse.favorites.commands.myOpenView"
+            name="MyOpenFavoritView">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -73,6 +79,26 @@
                   icon="icons/sample.gif"
                   id="com.qualityeclipse.favorites.menus.openFavoritesView"
                   mnemonic="O">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="activeContexts">
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <equals
+                              value="com.qualityeclipse.favorites.workbenchActionSet">
+                        </equals>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.qualityeclipse.favorites.commands.myOpenView"
+                  icon="icons/sample.gif"
+                  id="com.qualityeclipse.favorites.menus.myOpenFavoritesView"
+                  mnemonic="O"
+                  tooltip="My Open View">
                <visibleWhen
                      checkEnabled="false">
                   <with
@@ -321,6 +347,18 @@
       <handler
             class="com.qualityeclipse.favorites.handlers.RenameFavoritesHandler"
             commandId="com.qualityeclipse.favorites.commands.rename">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.qualityeclipse.favorites.handlers.MyOpenFavoriteViewHandler"
+            commandId="com.qualityeclipse.favorites.commands.myOpenView">
          <enabledWhen>
             <with
                   variable="selection">
