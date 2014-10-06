@@ -11,8 +11,7 @@ import org.eclipse.jdt.core.JavaModelException;
 
 import com.qualityeclipse.favorites.FavoritesLog;
 
-public class FavoriteJavaElement
-		implements IFavoriteItem
+public class FavoriteJavaElement extends BasicFavoriteItem
 {
 	private FavoriteItemType type;
 	private IJavaElement element;

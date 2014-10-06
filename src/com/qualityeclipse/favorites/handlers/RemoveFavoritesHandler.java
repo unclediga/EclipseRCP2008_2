@@ -17,6 +17,7 @@ public class RemoveFavoritesHandler extends AbstractHandler
 {
    public Object execute(ExecutionEvent event)
          throws ExecutionException {
+	  System.out.println("I am RemoveFavoritesHandler");
       ISelection selection = HandlerUtil.getCurrentSelection(event);
       if (selection instanceof IStructuredSelection)
          FavoritesManager.getManager().removeFavorites(

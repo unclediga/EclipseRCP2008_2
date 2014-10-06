@@ -14,6 +14,7 @@ import org.osgi.framework.Version;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
+import com.qualityeclipse.favorites.model.BasicFavoriteItem;
 import com.qualityeclipse.favorites.model.FavoritesManager;
 
 /**
@@ -51,6 +52,9 @@ public class FavoritesActivator extends AbstractUIPlugin {
       FavoritesManager.getManager().saveFavorites();
 		saveConfigPrefs();
 		plugin = null;
+		
+		BasicFavoriteItem.disposeColors();
+		
 		super.stop(context);
 	}
 
