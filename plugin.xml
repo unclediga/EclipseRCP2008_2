@@ -467,6 +467,14 @@
          </enabledWhen>
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.qualityeclipse.favorites.properties.FavoriteDefaultsPreferencePage"
+            id="com.qualityeclipse.favorites.prefs.defaults"
+            name="Defaults">
+      </page>
+   </extension>
    
 
 </plugin>

@@ -8,10 +8,16 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.views.properties.ColorPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySheetEntry;
+import org.eclipse.ui.views.properties.IPropertySource2;
+import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 import com.qualityeclipse.favorites.FavoritesActivator;
 
-public abstract class BasicFavoriteItem implements IFavoriteItem {
+public abstract class BasicFavoriteItem implements IFavoriteItem,
+		IPropertySource2 {
 	private Color color;
 	private static Color defaultColor;
 
@@ -69,6 +75,67 @@ public abstract class BasicFavoriteItem implements IFavoriteItem {
 		while (iter.hasNext())
 			iter.next().dispose();
 		colorCache.clear();
+	}
+
+	private static final String COLOR_ID = "favorite.color";
+	private static final ColorPropertyDescriptor COLOR_PROPERTY_DESCRIPTOR = new ColorPropertyDescriptor(
+			COLOR_ID, "Color");
+
+	private static final String HASH_ID = "favorite.hash";
+	private static final TextPropertyDescriptor HASH_PROPERTY_DESCRIPTOR = new TextPropertyDescriptor(
+			HASH_ID, "Hash Code");
+	static {
+		HASH_PROPERTY_DESCRIPTOR.setCategory("Other");
+		HASH_PROPERTY_DESCRIPTOR
+				.setFilterFlags(new String[] { IPropertySheetEntry.FILTER_ID_EXPERT });
+		HASH_PROPERTY_DESCRIPTOR.setAlwaysIncompatible(true);
+	}
+
+	private static final IPropertyDescriptor[] DESCRIPTORS = {
+			COLOR_PROPERTY_DESCRIPTOR, HASH_PROPERTY_DESCRIPTOR };
+
+	public Object getEditableValue() {
+		return this;
+	}
+
+	public IPropertyDescriptor[] getPropertyDescriptors() {
+		return DESCRIPTORS;
+	}
+
+	public Object getPropertyValue(Object id) {
+		if (id.equals(COLOR_ID)) {
+			return getColor().getRGB();
+		} else if (id.equals(HASH_ID)) {
+			return new Integer(hashCode());
+		}
+		return null;
+	}
+
+	public boolean isPropertySet(Object id) {
+		if (COLOR_ID.equals(id))
+			return getColor() != getDefaultColor();
+		if (HASH_ID.equals(id)) {
+			// return true for indicating that hash
+			// does not have a meaningful default value
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isPropertyResettable(Object id) {
+		if (COLOR_ID.equals(id))
+			return true;
+		return false;
+	}
+	
+	public void resetPropertyValue(Object id) {
+		if (COLOR_ID.equals(id))
+			setColor(null);
+	}	
+
+	public void setPropertyValue(Object id, Object value) {
+		if (COLOR_ID.equals(id))
+			setColor(getColor((RGB) value));
 	}
 
 }
