@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions,
  org.eclipse.ui.ide,
  org.eclipse.jdt.ui,
- org.eclipse.ui.editors
+ org.eclipse.ui.editors,
+ org.eclipse.jface.text
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.qualityeclipse.favorites.handlers,

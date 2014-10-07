@@ -3,7 +3,6 @@ package com.qualityeclipse.favorites.editors;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.layout.TreeColumnLayout;
-import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -39,36 +38,33 @@ public class PropertiesEditor extends MultiPageEditorPart {
 		createPropertiesPage();
 		createSourcePage();
 		updateTitle();
+		initTreeContent();
 	}
 
 	private TreeColumn keyColumn;
 	private TreeColumn valueColumn;
-	
+
 	private void createPropertiesPage() {
 
 		Composite treeContainer = new Composite(getContainer(), SWT.NONE);
 		TreeColumnLayout layout = new TreeColumnLayout();
 		treeContainer.setLayout(layout);
-		
+
 		treeViewer = new TreeViewer(treeContainer, SWT.MULTI
 				| SWT.FULL_SELECTION);
 		Tree tree = treeViewer.getTree();
 		tree.setHeaderVisible(true);
-		
-		keyColumn = new TreeColumn(tree,SWT.NONE);
+
+		keyColumn = new TreeColumn(tree, SWT.NONE);
 		keyColumn.setText("Key");
 		layout.setColumnData(keyColumn, new ColumnWeightData(2));
 
-		valueColumn = new TreeColumn(tree,SWT.NONE);
+		valueColumn = new TreeColumn(tree, SWT.NONE);
 		valueColumn.setText("Value");
 		layout.setColumnData(valueColumn, new ColumnWeightData(3));
-		
+
 		int index = addPage(treeContainer);
 		setPageText(index, "Properties");
-		
-		
-		
-		
 	}
 
 	private void createSourcePage() {
@@ -89,6 +85,33 @@ public class PropertiesEditor extends MultiPageEditorPart {
 		setPartName(editorInput.getName());
 		setTitleToolTip(editorInput.getToolTipText());
 
+	}
+
+	private PropertiesEditorContentProvider treeContentProvider;
+	private PropertiesEditorLabelProvider treeLabelProvider;
+
+	void initTreeContent() {
+		treeContentProvider = new PropertiesEditorContentProvider();
+		treeViewer.setContentProvider(treeContentProvider);
+		treeLabelProvider = new PropertiesEditorLabelProvider();
+		treeViewer.setLabelProvider(treeLabelProvider);
+
+		// Reset the input from the text editor’s content
+		// after the editor initialization has completed.
+		treeViewer.setInput(new PropertyFile(""));
+		treeViewer.getTree().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				updateTreeFromTextEditor();
+			}
+		});
+		treeViewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
+	}
+
+	void updateTreeFromTextEditor() {
+		PropertyFile propertyFile = new PropertyFile(textEditor
+				.getDocumentProvider().getDocument(textEditor.getEditorInput())
+				.get());
+		treeViewer.setInput(propertyFile);
 	}
 
 	public void setFocus() {
