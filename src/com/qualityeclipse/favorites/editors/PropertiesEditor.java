@@ -2,8 +2,14 @@ package com.qualityeclipse.favorites.editors;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.layout.TreeColumnLayout;
+import org.eclipse.jface.viewers.ColumnLayoutData;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
@@ -35,12 +41,34 @@ public class PropertiesEditor extends MultiPageEditorPart {
 		updateTitle();
 	}
 
+	private TreeColumn keyColumn;
+	private TreeColumn valueColumn;
+	
 	private void createPropertiesPage() {
 
-		treeViewer = new TreeViewer(getContainer(), SWT.MULTI
+		Composite treeContainer = new Composite(getContainer(), SWT.NONE);
+		TreeColumnLayout layout = new TreeColumnLayout();
+		treeContainer.setLayout(layout);
+		
+		treeViewer = new TreeViewer(treeContainer, SWT.MULTI
 				| SWT.FULL_SELECTION);
-		int index = addPage(treeViewer.getControl());
+		Tree tree = treeViewer.getTree();
+		tree.setHeaderVisible(true);
+		
+		keyColumn = new TreeColumn(tree,SWT.NONE);
+		keyColumn.setText("Key");
+		layout.setColumnData(keyColumn, new ColumnWeightData(2));
+
+		valueColumn = new TreeColumn(tree,SWT.NONE);
+		valueColumn.setText("Value");
+		layout.setColumnData(valueColumn, new ColumnWeightData(3));
+		
+		int index = addPage(treeContainer);
 		setPageText(index, "Properties");
+		
+		
+		
+		
 	}
 
 	private void createSourcePage() {
