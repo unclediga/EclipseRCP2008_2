@@ -255,6 +255,14 @@
                icon="icons/paste_edit.gif">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.qualityeclipse.favorites.views.FavoritesView?after=other">
+         <command
+               commandId="org.eclipse.ui.file.properties"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension point="org.eclipse.ui.handlers">
       <handler class="com.qualityeclipse.favorites.handlers.OpenFavoritesViewHandler"
@@ -426,6 +434,46 @@
                id="com.qualityeclipse.favorites.workbenchActionSet">
          </actionSet>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="com.qualityeclipse.favorites.properties.FavoriteResourcePropertyPage"
+            icon="icons/sample.gif"
+            id="com.qualityeclipse.favorites.resourcePropertyPage"
+            name="Favorite Properties">
+         <enabledWhen>
+         	<and>
+            <adapt
+                  type="org.eclipse.core.resources.IResource">
+            </adapt>
+            <not>
+               <instanceof
+                     value="com.qualityeclipse.favorites.model.IFavoriteItem">
+               </instanceof>
+            </not>
+         	</and>
+         </enabledWhen>
+      </page>
+      <page
+            class="com.qualityeclipse.favorites.properties.FavoriteItemPropertyPage"
+            icon="icons/sample.gif"
+            id="com.qualityeclipse.favorites.favoritesItemPropertyPage"
+            name="Favorite Properties">
+         <enabledWhen>
+            <instanceof
+                  value="com.qualityeclipse.favorites.model.IFavoriteItem">
+            </instanceof>
+         </enabledWhen>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.qualityeclipse.favorites.properties.FavoriteDefaultsPreferencePage"
+            id="com.qualityeclipse.favorites.prefs.defaults"
+            name="Defaults">
+      </page>
    </extension>
    
 

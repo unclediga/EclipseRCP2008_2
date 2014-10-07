@@ -6,8 +6,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 
-public class FavoriteResource
-		implements IFavoriteItem
+public class FavoriteResource extends BasicFavoriteItem
 {
 	private FavoriteItemType type;
 	private IResource resource;
