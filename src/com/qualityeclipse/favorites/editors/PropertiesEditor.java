@@ -26,6 +26,7 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
 import com.qualityeclipse.favorites.FavoritesLog;
+import com.qualityeclipse.favorites.views.AltClickCellEditListener;
 
 public class PropertiesEditor extends MultiPageEditorPart {
 
@@ -265,8 +266,8 @@ public class PropertiesEditor extends MultiPageEditorPart {
 			}
 		});
 
-		// treeViewer.getColumnViewerEditor().addEditorActivationListener(
-		// new AltClickCellEditListener());
+		 treeViewer.getColumnViewerEditor().addEditorActivationListener(
+		 new AltClickCellEditListener());
 
 	}
 
