@@ -334,11 +334,17 @@ public class PropertiesEditor extends MultiPageEditorPart {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
+		if(getActivePage() == 0 && isPageModified)
+			updateTextEditorFromTree();
+		isPageModified = false;
 		textEditor.doSave(monitor);
 	}
 
 	@Override
 	public void doSaveAs() {
+		if(getActivePage() == 0 && isPageModified)
+			updateTextEditorFromTree();
+		isPageModified = false;
 		textEditor.doSaveAs();
 		setInput(textEditor.getEditorInput());
 		updateTitle();
