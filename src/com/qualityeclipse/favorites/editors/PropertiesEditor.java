@@ -292,6 +292,29 @@ public class PropertiesEditor extends MultiPageEditorPart {
 		return isPageModified || super.isDirty();
 	}
 	
+	
+	@Override
+	protected void pageChange(int newPageIndex) {
+		switch (newPageIndex) {
+		case 0:
+			if (isDirty())
+				updateTreeFromTextEditor();
+			break;
+		case 1:
+			if (isPageModified)
+				updateTextEditorFromTree();
+			break;
+		}
+		isPageModified = false;	
+		super.pageChange(newPageIndex);
+	}
+
+	void updateTextEditorFromTree() {
+		textEditor.getDocumentProvider()
+				.getDocument(textEditor.getEditorInput())
+				.set(((PropertyFile) treeViewer.getInput()).asText());
+	}
+	
 	public void setFocus() {
 		switch (getActivePage()) {
 		case 0:
