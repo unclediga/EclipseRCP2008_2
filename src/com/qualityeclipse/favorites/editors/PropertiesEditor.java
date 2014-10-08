@@ -271,13 +271,27 @@ public class PropertiesEditor extends MultiPageEditorPart {
 
 	}
 
+	private boolean isPageModified;
+	
 	public void treeModified() {
 		boolean wasDirty = isDirty();
-		// isPageModified = true;
+		isPageModified = true;
 		if (!wasDirty)
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 	}
 
+	@Override
+	protected void handlePropertyChange(int propertyId) {
+		if (propertyId == IEditorPart.PROP_DIRTY)
+			isPageModified = isDirty();
+		super.handlePropertyChange(propertyId);
+	}	
+	
+	@Override
+	public boolean isDirty() {
+		return isPageModified || super.isDirty();
+	}
+	
 	public void setFocus() {
 		switch (getActivePage()) {
 		case 0:
